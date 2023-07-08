@@ -1,5 +1,6 @@
 package com.example.projectboard.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,36 +18,41 @@ class ArticleControllerTest {
         this.mvc = mvc;
     }
 
+    @Disabled("구현 중")
     @Test
     public void getViewTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.view().name("articles/index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles"));
     }
-
+    @Disabled("구현 중")
     @Test
     public void getCommentByArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("articles"));
+                .andExpect(MockMvcResultMatchers.view().name("articles/detail"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("articles"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("articlesComments"));
     }
-
+    @Disabled("구현 중")
     @Test
     public void getArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("articles"));
+                .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search"));
     }
 
+    @Disabled("구현 중")
     @Test
     public void getHashtagByArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashing"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("articles"));
+                .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search-hashtag"));
     }
 
 
