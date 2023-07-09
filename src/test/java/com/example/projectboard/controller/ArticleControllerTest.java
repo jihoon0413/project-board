@@ -34,7 +34,7 @@ class ArticleControllerTest {
     public void getCommentByArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.view().name("articles/detail"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articlesComments"));
@@ -46,7 +46,7 @@ class ArticleControllerTest {
     public void getArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search"));
     }
 
@@ -55,7 +55,7 @@ class ArticleControllerTest {
     public void getHashtagByArticleTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashing"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search-hashtag"));
     }
 
