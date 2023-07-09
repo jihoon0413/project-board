@@ -18,15 +18,17 @@ class ArticleControllerTest {
         this.mvc = mvc;
     }
 
-    @Disabled("구현 중")
+
     @Test
     public void getViewTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/articles"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.TEXT_HTML))
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(MockMvcResultMatchers.view().name("articles/index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles"));
     }
+
+
     @Disabled("구현 중")
     @Test
     public void getCommentByArticleTest() throws Exception {
@@ -37,6 +39,8 @@ class ArticleControllerTest {
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articlesComments"));
     }
+
+
     @Disabled("구현 중")
     @Test
     public void getArticleTest() throws Exception {
