@@ -27,7 +27,9 @@ spring:
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
-# h2 test 서버 사용할 때
+    open-in-view: false
+
+      # h2 test 서버 사용할 때
 #  h2.console.enabled: true
   sql.init.mode: always
   data.rest:
