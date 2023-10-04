@@ -101,15 +101,40 @@ class ArticleControllerTest {
                 .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search"));
     }
 
-    @Disabled("구현 중")
+    @DisplayName("[view] [GET] 게시글 해시태그 검색 페이지 - 정상 호출")
     @Test
-    public void getHashtagByArticleTest() throws Exception {
+    public void givenNothing_whenRequestingArticleHashtagSearchView_thenReturnsArticleHashtagSearchView() throws Exception {
+        given(articleService.searchArticlesViaHashtag(eq(null), any(Pageable.class))).willReturn(Page.empty());
+
         mvc.perform(MockMvcRequestBuilders.get("/articles/search-hashing"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("articles/search-hashtag"));
+                .andExpect(view().name("articles/search-hashtag"))
+                .andExpect(model().attribute("articles", Page.empty()))
+                .andExpect(model().attribute("hashtag", Page.empty()))
+                .andExpect(model().attribute("paginationBarNumbers", Page.empty()));
+        then(articleService).should().searchArticlesViaHashtag(eq(null), any(Pageable.class));
     }
 
+    @DisplayName("[view] [GET] 게시글 해시태그 검색 페이지 - 정상 호출, 해시태그 입력")
+    @Test
+    public void givenHashtag_whenRequestingArticleHashtagSearchView_thenReturnsArticleHashtagSearchView() throws Exception {
+        String hashtags ="#java";
+        given(articleService.searchArticlesViaHashtag(eq(hashtags), any(Pageable.class))).willReturn(Page.empty());
+
+        mvc.perform(
+                        get("/articles/search-hashtag")
+                                .queryParam("searchValue", hashtags)
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search-hashtag"))
+                .andExpect(model().attribute("articles", Page.empty()))
+                .andExpect(model().attribute("hashtags", hashtags))
+                .andExpect(model().attributeExists("paginationBarNumbers"))
+                .andExpect(model().attribute("searchType", SearchType.HASHTAG));
+        then(articleService).should().searchArticlesViaHashtag(eq(hashtags), any(Pageable.class));
+    }
 
 
 
