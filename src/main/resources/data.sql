@@ -1,8 +1,8 @@
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-('jihoon', 'asdf1234', 'Jihoon', 'jihoon@mail.com', 'I am JiHoon.', now(), 'jihoon', now(), 'jihoon')
+('jihoon', '{noop}asdf1234', 'Jihoon', 'jihoon@mail.com', 'I am JiHoon.', now(), 'jihoon', now(), 'jihoon')
 ;
 insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
-('uno2', 'asdf1234', 'Uno2', 'uno2@mail.com', 'I am Uno2.', now(), 'uno2', now(), 'uno2')
+('uno2', '{noop}asdf1234', 'Uno2', 'uno2@mail.com', 'I am Uno2.', now(), 'uno2', now(), 'uno2')
 ;
 
 insert into article (id, user_id, title, content, hashtag, created_by, modified_by, created_at, modified_at) values (1, 'uno2', 'mauris sit amet eros suspendisse accumsan tortor', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 'Green', 'Bradney', 'Corena', '2022-10-17 14:39:31', '2022-08-11 03:01:19');
