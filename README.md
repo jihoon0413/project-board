@@ -35,3 +35,5 @@ Spring Boot
 ## 데모 페이지
 
 https://project-board-jihoon-f31222d19af4.herokuapp.com/
+
+사용자 아이디/비번: jihoon/asdf1234
