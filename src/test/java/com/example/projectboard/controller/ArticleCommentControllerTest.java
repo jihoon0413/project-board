@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("View 컨트롤러 - 댓글")
-@Import(TestSecurityConfig.class)
+@Import({TestSecurityConfig.class, FormDataEncoder.class})
 @WebMvcTest(ArticleCommentController.class)
 class ArticleCommentControllerTest {
 
@@ -38,7 +38,7 @@ class ArticleCommentControllerTest {
     @MockBean private ArticleCommentService articleCommentService;
 
 
-    public ArticleCommentControllerTest(
+    ArticleCommentControllerTest(
             @Autowired MockMvc mvc,
             @Autowired FormDataEncoder formDataEncoder
     ) {
@@ -47,8 +47,7 @@ class ArticleCommentControllerTest {
     }
 
 
-
-    @WithUserDetails(value = "jihoonTest", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    @WithUserDetails(value = "unoTest", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     @DisplayName("[view][POST] 댓글 등록 - 정상 호출")
     @Test
     void givenArticleCommentInfo_whenRequesting_thenSavesNewArticleComment() throws Exception {
@@ -70,14 +69,14 @@ class ArticleCommentControllerTest {
         then(articleCommentService).should().saveArticleComment(any(ArticleCommentDto.class));
     }
 
-    @WithUserDetails(value = "jihoonTest", setupBefore = TestExecutionEvent.TEST_EXECUTION)
+    @WithUserDetails(value = "unoTest", setupBefore = TestExecutionEvent.TEST_EXECUTION)
     @DisplayName("[view][GET] 댓글 삭제 - 정상 호출")
     @Test
     void givenArticleCommentIdToDelete_whenRequesting_thenDeletesArticleComment() throws Exception {
         // Given
         long articleId = 1L;
         long articleCommentId = 1L;
-        String userId = "jihoonTest";
+        String userId = "unoTest";
         willDoNothing().given(articleCommentService).deleteArticleComment(articleCommentId, userId);
 
         // When & Then
