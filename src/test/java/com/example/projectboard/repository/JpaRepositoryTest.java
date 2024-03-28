@@ -131,7 +131,7 @@ class JpaRepositoryTest {
         ));
 
         // When
-        Page<Article> articlePage = articleRepository.findByHashtagNames(hashtagNames, (java.awt.print.Pageable) pageable);
+        Page<Article> articlePage = articleRepository.findByHashtagNames(hashtagNames, pageable);
 
         // Then
         assertThat(articlePage.getContent()).hasSize(pageable.getPageSize());
