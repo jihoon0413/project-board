@@ -2,8 +2,8 @@ package com.example.projectboard.repository.querydsl;
 
 import com.example.projectboard.domain.Article;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.List;
 

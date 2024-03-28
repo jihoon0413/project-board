@@ -2,7 +2,6 @@ package com.example.projectboard.controller;
 
 import com.example.projectboard.domain.type.FormStatus;
 import com.example.projectboard.domain.type.SearchType;
-import com.example.projectboard.dto.UserAccountDto;
 import com.example.projectboard.dto.request.ArticleRequest;
 import com.example.projectboard.dto.response.ArticleResponse;
 import com.example.projectboard.dto.response.ArticleWithCommentsResponse;
@@ -42,6 +41,7 @@ public class ArticleController {
         map.addAttribute("articles", articles);
         map.addAttribute("paginationBarNumbers", barNumbers);
         map.addAttribute("searchTypes", SearchType.values());
+        map.addAttribute("searchTypeHashtag", SearchType.HASHTAG);
 
         return "articles/index";
     }
@@ -53,6 +53,7 @@ public class ArticleController {
         map.addAttribute("article", article);
         map.addAttribute("articleComments", article.articleCommentsResponse());
         map.addAttribute("totalCount", articleService.getArticleCount());
+        map.addAttribute("searchTypeHashtag", SearchType.HASHTAG);
 
         return "articles/detail";
     }

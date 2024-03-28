@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
-import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,16 +28,16 @@ public class ArticleRepositoryCustomImpl extends QuerydslRepositorySupport imple
     }
 
     @Override
-    public Page<Article> findByHashtagNames(Collection<String> hashtagNames, Pageable pageable) {
+    public Page<Article> findByHashtagNames(Collection<String> hashtagNames, org.springframework.data.domain.Pageable pageable) {
         QHashtag hashtag = QHashtag.hashtag;
         QArticle article = QArticle.article;
 
         JPQLQuery<Article> query = from(article)
                 .innerJoin(article.hashtags, hashtag)
                 .where(hashtag.hashtagName.in(hashtagNames));
-        List<Article> articles = getQuerydsl().applyPagination((org.springframework.data.domain.Pageable) pageable, query).fetch();
+        List<Article> articles = getQuerydsl().applyPagination(pageable, query).fetch();
 
-        return new PageImpl<>(articles, (org.springframework.data.domain.Pageable) pageable, query.fetchCount());
+        return new PageImpl<>(articles, pageable, query.fetchCount());
     }
 
 }

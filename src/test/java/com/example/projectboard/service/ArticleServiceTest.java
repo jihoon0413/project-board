@@ -100,15 +100,15 @@ class ArticleServiceTest {
         // Given
         String hashtagName = "난 없지롱";
         Pageable pageable = Pageable.ofSize(20);
-        given(articleRepository.findByHashtagNames(List.of(hashtagName), (java.awt.print.Pageable) pageable)).willReturn(new PageImpl<>(List.of(), pageable, 0));
+
+        given(articleRepository.findByHashtagNames(List.of(hashtagName), pageable)).willReturn(new PageImpl<>(List.of(), pageable, 0));
 
         // When
         Page<ArticleDto> articles = sut.searchArticlesViaHashtag(hashtagName, pageable);
 
         // Then
         assertThat(articles).isEqualTo(Page.empty(pageable));
-        then(articleRepository).should().findByHashtagNames(List.of(hashtagName), (java.awt.print.Pageable) pageable);
-    }
+        then(articleRepository).should().findByHashtagNames(List.of(hashtagName), pageable);}
 
     @DisplayName("게시글을 해시태그 검색하면, 게시글 페이지를 반환한다.")
     @Test
@@ -117,14 +117,14 @@ class ArticleServiceTest {
         String hashtagName = "java";
         Pageable pageable = Pageable.ofSize(20);
         Article expectedArticle = createArticle();
-        given(articleRepository.findByHashtagNames(List.of(hashtagName), (java.awt.print.Pageable) pageable)).willReturn(new PageImpl<>(List.of(expectedArticle), pageable, 1));
+        given(articleRepository.findByHashtagNames(List.of(hashtagName), pageable)).willReturn(new PageImpl<>(List.of(expectedArticle), pageable, 1));
 
         // When
         Page<ArticleDto> articles = sut.searchArticlesViaHashtag(hashtagName, pageable);
 
         // Then
         assertThat(articles).isEqualTo(new PageImpl<>(List.of(ArticleDto.from(expectedArticle)), pageable, 1));
-        then(articleRepository).should().findByHashtagNames(List.of(hashtagName), (java.awt.print.Pageable) pageable);
+        then(articleRepository).should().findByHashtagNames(List.of(hashtagName), pageable);
     }
 
     @DisplayName("게시글 ID로 조회하면, 댓글 달긴 게시글을 반환한다.")
